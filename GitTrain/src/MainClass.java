@@ -15,6 +15,12 @@ public class MainClass {
 
     static int sub(int a, int b) {
         return a - b;
+
+    }
+
+    static String hello(String str) {
+        return str;
+
     }
 
 
