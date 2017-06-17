@@ -5,6 +5,7 @@ public class MainClass {
         System.out.println("Hello Git!11");
         System.out.println(add(2, 8));
         System.out.println(sub(5, 3));
+        System.out.println(mult(5, 3));
     }
 
     static int add(int a, int b) {
@@ -13,8 +14,15 @@ public class MainClass {
 
 
     static int sub(int a, int b) {
-        return a -b;
+        return a - b;
     }
+
+
+    static int mult(int a, int b) {
+        return a * b;
+    }
+
+
 
 
 }//MainClass
