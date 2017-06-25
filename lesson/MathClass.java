@@ -1,5 +1,6 @@
 public class Math {
-		public static int add(int a, int b) {
-			return Math.round(a + b);
-		}
+
+		public static void add(int a, int b) {
+			System.out.println(Math.round(a + b);
+	}
 }
