@@ -1,6 +1,27 @@
+import java.util.Date;
+
 public class MainGitClass {
     public static void main(String[] args) {
-        System.out.println("Hi Git!");
-        MathClass.add(5, 3);
+//        CreateFolder.create();
+//        CreateFolder.delete();
+
+        int x = 1;
+        int y = 0;
+
+        y = y + x;
+
+        x = x * 2;
+        y = y + x;
+
+        x = x * 2;
+//        y = y + x;
+
+        x = x * 2;
+//        y = y + x;
+
+        x = x * 2;
+        y = y + x;
+
+        System.out.println(y);
     }
 }

@@ -20,17 +20,17 @@ public class Downloader {
         fileName = fileName.replace(':', '.');
         fileName = fileName.replace('/', '.');
 
-        System.out.println(fileName);
-
         File dir = new File("downloaded_pages");
         File page = new File("downloaded_pages", fileName);
 
         if (!dir.exists()) dir.mkdir();
+
         try {
             page.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
+
         return page.getAbsoluteFile();
     }
 
