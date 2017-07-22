@@ -22,7 +22,7 @@ public class Downloader {
 
         File dir = new File("downloaded_pages");
         File page = new File("downloaded_pages", fileName);
-
+        System.out.println(fileName);
         if (!dir.exists()) dir.mkdir();
 
         try {
@@ -69,7 +69,8 @@ public class Downloader {
     public static void main(String[] args) throws IOException {
 //    createFile("http://lenta.ru/");
 //    download("https://lenta.ru/");
-        download("https://4pda.ru/");
+//        download("https://4pda.ru/");
+        download("https://www.youtube.com/watch?v=GQzORogZX-Q");
     }
 
 }
