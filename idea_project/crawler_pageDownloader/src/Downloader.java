@@ -16,7 +16,7 @@ public class Downloader {
 
     public static File createFile(String url) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd_HH.mm.ss");
-        String fileName = url + "_" + dateFormat.format(new Date()) + ".txt";
+        String fileName = "_" + dateFormat.format(new Date()) + ".txt";
         fileName = fileName.replace(':', '.');
         fileName = fileName.replace('/', '.');
 
