@@ -1,2 +1,0 @@
-sout "Freedom!!!";
-sout "HNY!";
