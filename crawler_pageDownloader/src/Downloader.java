@@ -1,76 +1,50 @@
-import sun.text.normalizer.UTF16;
-import sun.text.normalizer.UnicodeSet;
-import sun.util.calendar.BaseCalendar;
-
 import java.io.*;
-import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
-import java.sql.Time;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.time.Clock;
-import java.util.Date;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Downloader {
 
-    public static File createFile(String url) {
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy.MM.dd_HH.mm.ss");
-        String fileName = "_" + dateFormat.format(new Date()) + ".txt";
-        fileName = fileName.replace(':', '.');
-        fileName = fileName.replace('/', '.');
 
-        File dir = new File("downloaded_pages");
-        File page = new File("downloaded_pages", fileName);
-        System.out.println(fileName);
-        if (!dir.exists()) dir.mkdir();
-
-        try {
-            page.createNewFile();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return page.getAbsoluteFile();
+    public String download(String url) throws UnsupportedEncodingException {
+        return getPage(url, getCharset(url));
     }
 
 
-    public static String download(String url) {
-        BufferedReader br = null;
-        FileWriter writer = null;
-        BufferedWriter bw = null;
-        URL page = null;
 
+    private String getCharset(String url) {
+        Pattern p = Pattern.compile("charset=(\"|)[A-z,-]{1,}[0-9]{1,}");
+        Matcher m = p.matcher(getPage(url, "UTF-8"));
+        String result = null;
+        while (m.find()) {
+            result = m.group().substring(8);
+        }
+        if (result.startsWith("\"")) {
+            result = result.replaceAll("\"", "");
+        }
+        return result;
+    }
+
+
+
+    private String getPage(String url, String charset) {
+        BufferedReader br = null;
+        URL page = null;
+        String line;
+        StringBuilder sb = new StringBuilder();
 
         try {
             page = new URL(url);
-        } catch (MalformedURLException e) {
-            e.printStackTrace();
-        }
+            br = new BufferedReader(new InputStreamReader(page.openStream(), Charset.forName(charset)));
 
-        try {
-            br = new BufferedReader(new InputStreamReader(page.openStream()));
-//            writer = new FileWriter(createFile(url));
-            bw = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(createFile(url), false), Charset.forName("UTF-8")));
-
-            String line;
-            while ((line = br.readLine()) != null)
-//                System.out.println(line);
-//                writer.write(line);
-                bw.write(line);
-            bw.flush();
+            while ((line = br.readLine()) != null) {
+                sb.append(line);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return "f";
-    }
-
-
-    public static void main(String[] args) throws IOException {
-//    createFile("http://lenta.ru/");
-//    download("https://lenta.ru/");
-//        download("https://4pda.ru/");
-        download("https://www.youtube.com/watch?v=GQzORogZX-Q");
+        return sb.toString();
     }
 
 }
